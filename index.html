@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine?</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fff;
+      padding-top: 40px;
+      overflow: hidden;
+    }
+
+    img {
+      width: 220px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 14px 28px;
+      margin: 10px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      white-space: nowrap;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Minion with heart GIF -->
+  <img
+    src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"
+    alt="Minion Love"
+  />
+
+  <h2>Will you be my Valentine, babe? 💘</h2>
+
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No 😐</button>
+
+  <script>
+    let noScale = 1;
+    let yesScale = 1;
+    let clickCount = 0;
+
+    const noTexts = [
+      "No 😐",
+      "Wrong answer",
+      "Are you sure?",
+      "Think again",
+      "C’mon 😭",
+      "You better say yes",
+      "Babeee pleaseeee 🥺",
+      "Why are you like this",
+      "Okay last chance",
+      "…yes?"
+    ];
+
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    noBtn.addEventListener("click", () => {
+      // advance text first
+      clickCount++;
+
+      // shrink NO slower, grow YES faster
+      noScale -= 0.08;
+      yesScale += 0.12;
+
+      // update button label (guaranteed to reach the last line)
+      noBtn.textContent = noTexts[Math.min(clickCount, noTexts.length - 1)];
+
+      // apply scaling (NO still shrinks while it lasts)
+      noBtn.style.transform = `scale(${Math.max(noScale, 0.25)})`;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      // only hide NO after showing the final phrase
+      if (clickCount >= noTexts.length - 1) {
+        noBtn.style.display = "none";
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <h1>YAYYYYY 💕🥰</h1>
+        <p>I can’t wait to marry you, babe 💍❤️</p>
+        <img
+          src="https://media.giphy.com/media/3o6ZsY8Q6QF8p6Jr5u/giphy.gif"
+          style="width:300px;margin-top:20px;"
+          alt="Heart Fireworks"
+        />
+      `;
+    });
+  </script>
+
+</body>
+</html>
